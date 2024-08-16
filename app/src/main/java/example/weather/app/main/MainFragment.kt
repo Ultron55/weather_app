@@ -1,12 +1,14 @@
-package example.weather.app
+package example.weather.app.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import example.weather.app.databinding.FragmentMainBinding
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
     private var _binding : FragmentMainBinding? = null
     private val binding get() = _binding!!

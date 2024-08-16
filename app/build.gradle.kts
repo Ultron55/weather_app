@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.google.dagger.hilt.android)
 }
 
 android {
@@ -60,7 +62,7 @@ dependencies {
     //Coroutines and Livecycle
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.androidx.lifecycle.compiler)
+    ksp(libs.androidx.lifecycle.compiler)
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -72,4 +74,10 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.okhttp.urlconnection)
 
+    debugImplementation(libs.chucker.library)
+    releaseImplementation(libs.library.no.op)
+
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 }
