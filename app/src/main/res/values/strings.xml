@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Weather App</string>
+    <string name="last_update">last update</string>
+    <string name="celsius">%.1f℃</string>
 </resources>

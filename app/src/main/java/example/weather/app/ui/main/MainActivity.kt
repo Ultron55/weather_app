@@ -1,4 +1,4 @@
-package example.weather.app.main
+package example.weather.app.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction()
-            .add(binding.main.id, MainFragment())
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.mainAcitivityContainer.id, MainFragment())
             .commit()
         viewModel.requestCurrentWeather()
     }
