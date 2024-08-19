@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import example.weather.app.R
 import example.weather.app.databinding.FragmentCurrentWeatherBinding
@@ -42,7 +43,14 @@ class CurrentWeatherFragment : Fragment() {
         }
         viewModel.currentWeatherData.observe(viewLifecycleOwner) {
             binding.lastUpdateValueTv.text = it.lastUpdatedDate
+            binding.conditionTv.text = it.condition.text
             binding.temperatureTv.text = getString(R.string.celsius, it.tempC)
+            Glide
+                .with(requireContext())
+                .load("https:${it.condition.icon}")
+                .fitCenter()
+                .placeholder(R.drawable.weather_loader)
+                .into(binding.weatherIconImv)
         }
     }
 }

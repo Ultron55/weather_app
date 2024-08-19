@@ -20,6 +20,5 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(binding.mainAcitivityContainer.id, MainFragment())
             .commit()
-        viewModel.requestCurrentWeather()
     }
 }

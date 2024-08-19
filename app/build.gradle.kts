@@ -80,4 +80,9 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+
+    //Images
+    implementation(libs.glide)
+    implementation(libs.android.gif.drawable)
+
 }
