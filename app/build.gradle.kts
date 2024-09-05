@@ -62,6 +62,7 @@ dependencies {
     //Coroutines and Livecycle
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.play.services.location)
     ksp(libs.androidx.lifecycle.compiler)
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -84,5 +85,7 @@ dependencies {
     //Images
     implementation(libs.glide)
     implementation(libs.android.gif.drawable)
+
+    implementation(libs.androidx.preference.ktx)
 
 }

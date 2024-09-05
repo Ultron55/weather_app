@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import example.weather.app.App
 import example.weather.app.R
 import example.weather.app.databinding.FragmentCurrentWeatherBinding
+import example.weather.app.ui.main.MainActivity
 import example.weather.app.ui.main.MainViewModel
+import example.weather.app.ui.searchlocation.SearchLocationDialog
 
 @AndroidEntryPoint
 class CurrentWeatherFragment : Fragment() {
@@ -32,13 +35,16 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.locationTv.setOnClickListener {
+            (activity as MainActivity).callSearchLocationDialog()
+        }
         initObservers()
     }
 
     @SuppressLint("SetTextI18n")
     private fun initObservers() {
         viewModel.isLoading.observe(viewLifecycleOwner) { binding.progress.root.isVisible = it }
-        viewModel.locationWeather.observe(viewLifecycleOwner) {
+        viewModel.weatherLocationData.observe(viewLifecycleOwner) {
             binding.locationTv.text = "${it.name}, ${it.region}, ${it.country}"
         }
         viewModel.currentWeatherData.observe(viewLifecycleOwner) {

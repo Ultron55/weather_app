@@ -2,4 +2,9 @@
     <string name="app_name">Weather App</string>
     <string name="last_update">last update</string>
     <string name="celsius">%.1f℃</string>
+    <string name="set_location">Set location</string>
+    <string name="or">or</string>
+    <string name="search_location">Search location</string>
+    <string name="use_my_geo_data">Use my geo data</string>
+    <string name="search_location_hint">exp: London</string>
 </resources>

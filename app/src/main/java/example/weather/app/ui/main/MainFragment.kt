@@ -14,7 +14,7 @@ import example.weather.app.ui.weather.current.CurrentWeatherFragment
 class MainFragment : Fragment() {
     private var _binding : FragmentMainBinding? = null
     private val binding get() = _binding!!
-    val viewModel : MainViewModel by activityViewModels()
+    private val viewModel : MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
