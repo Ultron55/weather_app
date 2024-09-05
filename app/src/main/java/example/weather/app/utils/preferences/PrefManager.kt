@@ -4,10 +4,11 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 
 class PrefManager @Inject constructor(private val sharedPreferences: SharedPreferences) {
-    companion object {
-        const val IS_FIRST_LAUNCH_KEY = "isfirstlaunch"
+    private companion object {
+        const val IS_FIRST_LAUNCH_KEY = "is_first_launch"
         const val LOCATION_KEY = "location"
         const val GPS_LOCATION_KEY = "gps_location"
+        const val LANGUAGE_CODE_KEY = "language_code"
         const val IS_GPS_LOCATION_ENABLED_KEY = "is_gps_location_enabled"
     }
 
@@ -26,6 +27,10 @@ class PrefManager @Inject constructor(private val sharedPreferences: SharedPrefe
     var isFirstLaunch : Boolean
         set(_) = putBoolean(IS_FIRST_LAUNCH_KEY, false)
         get() = getBoolean(IS_FIRST_LAUNCH_KEY, true)
+
+    var savedLanguageCode
+        set(languageCode) = putString(LANGUAGE_CODE_KEY, languageCode)
+        get() = getString(LANGUAGE_CODE_KEY, "")
 
 
     fun clear() { sharedPreferences.edit().clear().apply() }

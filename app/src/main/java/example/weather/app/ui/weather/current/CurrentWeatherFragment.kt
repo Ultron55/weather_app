@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.children
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,6 +20,10 @@ import example.weather.app.databinding.FragmentCurrentWeatherBinding
 import example.weather.app.ui.main.MainActivity
 import example.weather.app.ui.main.MainViewModel
 import example.weather.app.ui.searchlocation.SearchLocationDialog
+import example.weather.app.utils.languages
+import example.weather.app.utils.preferences.PrefManager
+import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CurrentWeatherFragment : Fragment() {
@@ -23,13 +31,17 @@ class CurrentWeatherFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel : MainViewModel by activityViewModels()
+    @Inject
+    lateinit var prefManager: PrefManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCurrentWeatherBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentCurrentWeatherBinding.inflate(
+            layoutInflater, container, false
+        )
         return binding.root
     }
 
@@ -38,7 +50,35 @@ class CurrentWeatherFragment : Fragment() {
         binding.locationTv.setOnClickListener {
             (activity as MainActivity).callSearchLocationDialog()
         }
+        var lang = prefManager.savedLanguageCode
+        if (lang == "") lang = (requireActivity().application as App).systemLanguageCode
+        binding.languageTv.text = lang
+        binding.languageLl.setOnClickListener { openLanguagesPopupMenu() }
         initObservers()
+    }
+
+    private fun openLanguagesPopupMenu() {
+        val popupMenu = PopupMenu(requireContext(), binding.languageLl)
+        popupMenu.menu.add(getString(R.string.system))
+        languages.forEach { locale -> popupMenu.menu.add(locale.getDisplayName(locale)) }
+        val currentLanguage = prefManager.savedLanguageCode
+        popupMenu
+            .menu[if (currentLanguage == "" ) 0 else languages.indexOf(Locale(currentLanguage))]
+            .isEnabled = false
+        popupMenu.show()
+        val app = requireActivity().application as App
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            val systemLocale = Locale(app.systemLanguageCode)
+            if (menuItem.title == systemLocale.getDisplayName(systemLocale) ||
+                popupMenu.menu.children.firstOrNull() == menuItem) {
+                prefManager.savedLanguageCode = ""
+            } else {
+                prefManager.savedLanguageCode =
+                    languages[popupMenu.menu.children.indexOf(menuItem) - 1].toLanguageTag()
+            }
+            app.setLanguage()
+            true
+        }
     }
 
     @SuppressLint("SetTextI18n")

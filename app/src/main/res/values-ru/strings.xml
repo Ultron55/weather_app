@@ -7,4 +7,5 @@
     <string name="search_location">Поиск локации</string>
     <string name="use_my_geo_data">Использовать мои геоданные</string>
     <string name="search_location_hint">например: Лондон</string>
+    <string name="system">Система</string>
 </resources>

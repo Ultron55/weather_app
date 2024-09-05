@@ -37,6 +37,7 @@ class App : Application() {
         }
     }
     private var isLocationUpdating = false
+    lateinit var systemLanguageCode : String
 
     fun requestLocationUpdates()
     {
@@ -62,15 +63,17 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
+        systemLanguageCode = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+        if (systemLanguageCode.isEmpty())
+            systemLanguageCode = resources.configuration.locales[0].language
         setLanguage()
     }
 
-    private fun setLanguage() {
-        var languagetag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
-        if (languagetag.isEmpty())
-            languagetag = applicationContext.resources.configuration.locales[0].language
+    fun setLanguage() {
+        var lang = prefManager.savedLanguageCode
+        if (lang == "") lang = systemLanguageCode
         AppCompatDelegate.setApplicationLocales(
-            LocaleListCompat.forLanguageTags(Locale(languagetag).language)
+            LocaleListCompat.forLanguageTags(Locale(lang).language)
         )
     }
 }
