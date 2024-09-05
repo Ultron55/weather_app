@@ -17,6 +17,40 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resourceConfigurations += setOf(
+            "ar",
+            "hu",
+            "vi",
+            "el",
+            "da",
+            "he",
+            "id",
+            "es",
+            "it",
+            "ca",
+            "zh",
+            "ko",
+            "ms",
+            "de",
+            "nl",
+            "no",
+            "pl",
+            "pt",
+            "ro",
+            "ru",
+            "sk",
+            "th",
+            "tr",
+            "uk",
+            "fi",
+            "fr",
+            "hi",
+            "hr",
+            "cs",
+            "sv",
+            "ja"
+        )
     }
 
     buildTypes {
@@ -37,6 +71,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/source/navigation-args")
     }
 }
 

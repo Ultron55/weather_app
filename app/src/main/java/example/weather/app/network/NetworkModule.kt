@@ -1,6 +1,7 @@
 package example.weather.app.network
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,10 @@ object NetworkModule {
                     request.newBuilder().url(
                         request.url.newBuilder()
                             .addQueryParameter("key", API_KEY)
+                            .addQueryParameter("lang",
+                                AppCompatDelegate.getApplicationLocales()
+                                    .get(0)?.toLanguageTag() ?: "en"
+                            )
                             .build()
                     ).build()
                 )

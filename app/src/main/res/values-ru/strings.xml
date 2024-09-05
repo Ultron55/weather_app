@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="last_update">последнее обновление</string>
+    <string name="celsius">%.1f℃</string>
+    <string name="set_location">Выбрать локацию</string>
+    <string name="or">или</string>
+    <string name="search_location">Поиск локации</string>
+    <string name="use_my_geo_data">Использовать мои геоданные</string>
+    <string name="search_location_hint">например: Лондон</string>
+</resources>

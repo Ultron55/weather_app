@@ -3,7 +3,9 @@ package example.weather.app
 import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Looper
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -13,6 +15,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
 import example.weather.app.utils.preferences.PrefManager
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -59,5 +62,15 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
+        setLanguage()
+    }
+
+    private fun setLanguage() {
+        var languagetag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+        if (languagetag.isEmpty())
+            languagetag = applicationContext.resources.configuration.locales[0].language
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.forLanguageTags(Locale(languagetag).language)
+        )
     }
 }
