@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">posledná aktualizácia</string>
+    <string name="set_location">Nastaviť polohu</string>
+    <string name="or">alebo</string>
+    <string name="search_location">Vyhľadať polohu</string>
+    <string name="use_my_geo_data">Použiť moje geografické údaje</string>
+    <string name="search_location_hint">príklad: Londýn</string>
+    <string name="system">Systém</string>
+</resources>

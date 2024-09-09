@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">ultimo aggiornamento</string>
+    <string name="set_location">Imposta posizione</string>
+    <string name="or">o</string>
+    <string name="search_location">Cerca posizione</string>
+    <string name="use_my_geo_data">Utilizza i miei dati geografici</string>
+    <string name="search_location_hint">esempio: Londra</string>
+    <string name="system">Sistema</string>
+</resources>

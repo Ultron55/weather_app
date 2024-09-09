@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">cập nhật lần cuối</string>
+    <string name="set_location">Đặt vị trí</string>
+    <string name="or">hoặc</string>
+    <string name="search_location">Tìm kiếm vị trí</string>
+    <string name="use_my_geo_data">Sử dụng dữ liệu địa lý của tôi</string>
+    <string name="search_location_hint">ví dụ: London</string>
+    <string name="system">Hệ thống</string>
+</resources>

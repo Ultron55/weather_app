@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">τελευταία ενημέρωση</string>
+    <string name="set_location">Ορισμός τοποθεσίας</string>
+    <string name="or">ή</string>
+    <string name="search_location">Αναζήτηση τοποθεσίας</string>
+    <string name="use_my_geo_data">Χρήση των γεωγραφικών δεδομένων μου</string>
+    <string name="search_location_hint">παράδειγμα: Λονδίνο</string>
+    <string name="system">Σύστημα</string>
+</resources>

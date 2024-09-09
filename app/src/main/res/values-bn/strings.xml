@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">শেষ আপডেট</string>
+    <string name="set_location">অবস্থান সেট করুন</string>
+    <string name="or">বা</string>
+    <string name="search_location">অবস্থান অনুসন্ধান করুন</string>
+    <string name="use_my_geo_data">আমার জিও ডেটা ব্যবহার করুন</string>
+    <string name="search_location_hint">উদাহরণ: লন্ডন</string>
+    <string name="system">সিস্টেম</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">చివరి నవీకరణ</string>
+    <string name="set_location">స్థానాన్ని సెట్ చేయండి</string>
+    <string name="or">లేదా</string>
+    <string name="search_location">స్థానాన్ని శోధించండి</string>
+    <string name="use_my_geo_data">నా జియో డేటాను ఉపయోగించు</string>
+    <string name="search_location_hint">ఉదాహరణ: లండన్</string>
+    <string name="system">సిస్టమ్</string>
+</resources>

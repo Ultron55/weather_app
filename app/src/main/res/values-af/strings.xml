@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">laaste opdatering</string>
+    <string name="set_location">Stel ligging</string>
+    <string name="or">of</string>
+    <string name="search_location">Soek ligging</string>
+    <string name="use_my_geo_data">Gebruik my geo-data</string>
+    <string name="search_location_hint">example, London</string>
+    <string name="system">Stelsel</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">zosintha zomaliza</string>
+    <string name="set_location">Khazikitsani malo</string>
+    <string name="or">kapena</string>
+    <string name="search_location">Sakani malo</string>
+    <string name="use_my_geo_data">Gwiritsani ntchito data yanga ya geo</string>
+    <string name="search_location_hint">chitsanzo: London</string>
+    <string name="system">Dongosolo</string>
+</resources>

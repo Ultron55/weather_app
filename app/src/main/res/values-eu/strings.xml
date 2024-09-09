@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">azken eguneratzea</string>
+    <string name="set_location">Ezarri kokapena</string>
+    <string name="or">edo</string>
+    <string name="search_location">Bilatu kokapena</string>
+    <string name="use_my_geo_data">Erabili nire geodatuak</string>
+    <string name="search_location_hint">adibidea: Londres</string>
+    <string name="system">Sistema</string>
+</resources>

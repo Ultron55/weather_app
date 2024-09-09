@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">ultima actualizare</string>
+    <string name="set_location">Setați locația</string>
+    <string name="or">sau</string>
+    <string name="search_location">Căutați locația</string>
+    <string name="use_my_geo_data">Utilizați datele mele geografice</string>
+    <string name="search_location_hint">exemplu: Londra</string>
+    <string name="system">Sistem</string>
+</resources>

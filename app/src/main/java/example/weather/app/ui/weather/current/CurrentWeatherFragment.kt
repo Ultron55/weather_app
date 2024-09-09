@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.children
 import androidx.core.view.get
@@ -19,7 +18,8 @@ import example.weather.app.R
 import example.weather.app.databinding.FragmentCurrentWeatherBinding
 import example.weather.app.ui.main.MainActivity
 import example.weather.app.ui.main.MainViewModel
-import example.weather.app.ui.searchlocation.SearchLocationDialog
+import example.weather.app.utils.getFullLocationNameFormat
+import example.weather.app.utils.getLocation
 import example.weather.app.utils.languages
 import example.weather.app.utils.preferences.PrefManager
 import java.util.Locale
@@ -63,7 +63,7 @@ class CurrentWeatherFragment : Fragment() {
         languages.forEach { locale -> popupMenu.menu.add(locale.getDisplayName(locale)) }
         val currentLanguage = prefManager.savedLanguageCode
         popupMenu
-            .menu[if (currentLanguage == "" ) 0 else languages.indexOf(Locale(currentLanguage))]
+            .menu[if (currentLanguage == "" ) 0 else languages.indexOf(Locale(currentLanguage)) + 1]
             .isEnabled = false
         popupMenu.show()
         val app = requireActivity().application as App
@@ -85,7 +85,15 @@ class CurrentWeatherFragment : Fragment() {
     private fun initObservers() {
         viewModel.isLoading.observe(viewLifecycleOwner) { binding.progress.root.isVisible = it }
         viewModel.weatherLocationData.observe(viewLifecycleOwner) {
-            binding.locationTv.text = "${it.name}, ${it.region}, ${it.country}"
+            val location = getLocation(prefManager)
+            if (location == "") binding.locationTv.text = "${it.name}, ${it.region}, ${it.country}"
+            else {
+                viewModel.searchLocationName("${it.name}, ${it.region}, ${it.country}",
+                    requireContext())
+            }
+        }
+        viewModel.locationAddress.observe(viewLifecycleOwner) {
+            binding.locationTv.text = getFullLocationNameFormat(it)
         }
         viewModel.currentWeatherData.observe(viewLifecycleOwner) {
             binding.lastUpdateValueTv.text = it.lastUpdatedDate

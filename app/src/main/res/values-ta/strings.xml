@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">கடைசி புதுப்பிப்பு</string>
+    <string name="set_location">இருப்பிடத்தை அமை</string>
+    <string name="or">அல்லது</string>
+    <string name="search_location">இருப்பிடம் தேடு</string>
+    <string name="use_my_geo_data">எனது புவிசார் தரவைப் பயன்படுத்து</string>
+    <string name="search_location_hint">உதாரணம்: லண்டன்</string>
+    <string name="system">அமைப்பு</string>
+</resources>

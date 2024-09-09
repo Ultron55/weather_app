@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">përditësimi i fundit</string>
+    <string name="set_location">Cakto vendndodhjen</string>
+    <string name="or">ose</string>
+    <string name="search_location">Kërko vendndodhjen</string>
+    <string name="use_my_geo_data">Përdor të dhënat e mia gjeo</string>
+    <string name="search_location_hint">shembull: Londër</string>
+    <string name="system">Sistemi</string>
+</resources>

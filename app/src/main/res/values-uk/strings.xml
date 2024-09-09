@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">останнє оновлення</string>
+    <string name="set_location">Установити розташування</string>
+    <string name="or">або</string>
+    <string name="search_location">Пошук місця</string>
+    <string name="use_my_geo_data">Використовувати мої геодані</string>
+    <string name="search_location_hint">приклад: Лондон</string>
+    <string name="system">Система</string>
+</resources>

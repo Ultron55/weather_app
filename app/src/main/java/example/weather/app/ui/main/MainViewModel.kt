@@ -28,6 +28,7 @@ class MainViewModel @Inject constructor(
     val currentWeatherData = MutableLiveData<WeatherData>()
     val weatherLocationData = MutableLiveData<WeatherLocation>()
     val addresses = MutableLiveData<List<Address>>()
+    val locationAddress = MutableLiveData<Address>()
 
     fun requestCurrentWeather() {
         viewModelScope.launch {
@@ -59,6 +60,21 @@ class MainViewModel @Inject constructor(
                 geocoder.getFromLocationName(name, 20) { addresses.value = it }
             else
                 geocoder.getFromLocationName(name, 20)?.let { addresses.value = it }
+        }
+    }
+
+
+    fun searchLocationName(name : String, context: Context) {
+        val geocoder = Geocoder(context)
+        viewModelScope.launch {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                geocoder.getFromLocationName(name, 20) {
+                    locationAddress.value = it.firstOrNull()
+                }
+            else
+                geocoder.getFromLocationName(name, 20)?.let {
+                    locationAddress.value = it.firstOrNull()
+                }
         }
     }
 }

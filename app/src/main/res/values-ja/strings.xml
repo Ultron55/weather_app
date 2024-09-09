@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">最終更新</string>
+    <string name="set_location">場所を設定</string>
+    <string name="or">または</string>
+    <string name="search_location">場所を検索</string>
+    <string name="use_my_geo_data">私の地理データを使用する</string>
+    <string name="search_location_hint">例: ロンドン</string>
+    <string name="system">システム</string>
+</resources>

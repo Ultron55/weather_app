@@ -33,14 +33,14 @@ object NetworkModule {
             .addInterceptor(logging)
             .addInterceptor(Interceptor { chain ->
                 val request: Request = chain.request()
+                var lang =
+                    AppCompatDelegate.getApplicationLocales().get(0)?.toLanguageTag() ?: "en"
+                lang = lang.lowercase().replace('-', '_')
                 chain.proceed(
                     request.newBuilder().url(
                         request.url.newBuilder()
                             .addQueryParameter("key", API_KEY)
-                            .addQueryParameter("lang",
-                                AppCompatDelegate.getApplicationLocales()
-                                    .get(0)?.toLanguageTag() ?: "en"
-                            )
+                            .addQueryParameter("lang", lang)
                             .build()
                     ).build()
                 )

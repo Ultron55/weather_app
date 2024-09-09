@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">utolsó frissítés</string>
+    <string name="set_location">Hely beállítása</string>
+    <string name="or">vagy</string>
+    <string name="search_location">Hely keresése</string>
+    <string name="use_my_geo_data">Földrajzi adataim használata</string>
+    <string name="search_location_hint">példa: London</string>
+    <string name="system">Rendszer</string>
+</resources>

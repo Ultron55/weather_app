@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">ਆਖਰੀ ਅੱਪਡੇਟ</string>
+    <string name="set_location">ਟਿਕਾਣਾ ਸੈੱਟ ਕਰੋ</string>
+    <string name="or">ਜਾਂ</string>
+    <string name="search_location">ਸਥਾਨ ਖੋਜੋ</string>
+    <string name="use_my_geo_data">ਮੇਰੇ ਭੂਗੋਲਿਕ ਡੇਟਾ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+    <string name="search_location_hint">ਉਦਾਹਰਨ: ਲੰਡਨ</string>
+    <string name="system">ਸਿਸਟਮ</string>
+</resources>

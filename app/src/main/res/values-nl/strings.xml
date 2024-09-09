@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">laatste update</string>
+    <string name="set_location">Locatie instellen</string>
+    <string name="or">of</string>
+    <string name="search_location">Locatie zoeken</string>
+    <string name="use_my_geo_data">Mijn geodata gebruiken</string>
+    <string name="search_location_hint">voorbeeld: Londen</string>
+    <string name="system">Systeem</string>
+</resources>

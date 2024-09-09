@@ -4,6 +4,7 @@ import android.content.Context
 import android.location.Address
 import android.os.Build
 import android.view.Window
+import example.weather.app.utils.preferences.PrefManager
 import java.util.Locale
 
 fun getWindowHeight(window : Window, context: Context) : Int =
@@ -15,13 +16,21 @@ fun getWindowHeight(window : Window, context: Context) : Int =
 fun getFullLocationNameFormat(address: Address) =
     "${address.featureName}, ${address.adminArea}, ${address.countryName}"
 
+fun getLocation(prefManager: PrefManager) =
+    if (prefManager.isGPSLocationEnabled) prefManager.lastGPSLocation
+    else {
+        val selectedLocation = prefManager.selectedLocation
+        if (selectedLocation == "") prefManager.lastGPSLocation else selectedLocation
+    }
+
+
 val languages = listOf(
     Locale("en"),
     Locale("ar"),
     Locale("bn"),
     Locale("bg"),
     Locale("zh"),
-    Locale("zh_tw"),
+    Locale.TAIWAN,
     Locale("cs"),
     Locale("da"),
     Locale("nl"),
@@ -35,7 +44,6 @@ val languages = listOf(
     Locale("ja"),
     Locale("jv"),
     Locale("ko"),
-    Locale("zh_cmn"),
     Locale("mr"),
     Locale("pl"),
     Locale("pt"),
@@ -53,8 +61,5 @@ val languages = listOf(
     Locale("uk"),
     Locale("ur"),
     Locale("vi"),
-    Locale("zh_wuu"),
-    Locale("zh_hsn"),
-    Locale("zh_yue"),
     Locale("zu"),
 )

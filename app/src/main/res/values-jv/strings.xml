@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">update pungkasan</string>
+    <string name="set_location">Setel lokasi</string>
+    <string name="or">utawa</string>
+    <string name="search_location">Golek lokasi</string>
+    <string name="use_my_geo_data">Gunakake data geoku</string>
+    <string name="search_location_hint">conto: London</string>
+    <string name="system">Sistem</string>
+</resources>

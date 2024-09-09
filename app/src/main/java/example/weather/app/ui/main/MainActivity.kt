@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        viewModel.addresses.observe(this) { searchLocationDialog?.update(it) }
+        viewModel.addresses.observe(this) {
+            searchLocationDialog?.update(it) }
         (application as App).gpsLocation.observe(this) {
             viewModel.requestCurrentWeather()
         }

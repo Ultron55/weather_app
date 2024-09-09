@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">最后更新</string>
+    <string name="set_location">设置位置</string>
+    <string name="or">或者</string>
+    <string name="search_location">搜索地点</string>
+    <string name="use_my_geo_data">使用我的地理数据</string>
+    <string name="search_location_hint">示例：伦敦</string>
+    <string name="system">系统</string>
+</resources>

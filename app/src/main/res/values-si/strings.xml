@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">අවසන් යාවත්කාලීන කිරීම</string>
+    <string name="set_location">ස්ථානය සකසන්න</string>
+    <string name="or">හෝ</string>
+    <string name="search_location">ස්ථානය සොයන්න</string>
+    <string name="use_my_geo_data">මගේ භූ දත්ත භාවිතා කරන්න</string>
+    <string name="search_location_hint">උදාහරණය: ලන්ඩන්</string>
+    <string name="system">පද්ධතිය</string>
+</resources>

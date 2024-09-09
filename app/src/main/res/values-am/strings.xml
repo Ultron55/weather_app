@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">የመጨረሻው ዝመና</string>
+    <string name="set_location">አካባቢን አዘጋጅ</string>
+    <string name="or">ወይም</string>
+    <string name="search_location">አካባቢን ፈልግ</string>
+    <string name="use_my_geo_data">የእኔን የጂኦ ውሂብ ተጠቀም</string>
+    <string name="search_location_hint">ምሳሌ: ለንደን</string>
+    <string name="system">ስርዓት</string>
+</resources>

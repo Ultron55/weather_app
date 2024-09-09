@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">senaste uppdatering</string>
+    <string name="set_location">Ange plats</string>
+    <string name="or">eller</string>
+    <string name="search_location">Sök plats</string>
+    <string name="use_my_geo_data">Använd min geodata</string>
+    <string name="search_location_hint">exempel: London</string>
+    <string name="system">System</string>
+</resources>

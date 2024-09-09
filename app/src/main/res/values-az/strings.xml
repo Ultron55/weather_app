@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">son yeniləmə</string>
+    <string name="set_location">Məkanı təyin edin</string>
+    <string name="or">və ya</string>
+    <string name="search_location">Məkanı axtarın</string>
+    <string name="use_my_geo_data">Coğrafi məlumatlarımdan istifadə edin</string>
+    <string name="search_location_hint">misal: London</string>
+    <string name="system">Sistem</string>
+</resources>

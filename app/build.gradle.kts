@@ -1,3 +1,5 @@
+import java.util.Locale
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -19,38 +21,52 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += setOf(
-            "ar",
-            "hu",
-            "vi",
-            "el",
-            "da",
-            "he",
-            "id",
-            "es",
-            "it",
-            "ca",
-            "zh",
-            "ko",
-            "ms",
-            "de",
-            "nl",
-            "no",
-            "pl",
-            "pt",
-            "ro",
-            "ru",
-            "sk",
-            "th",
-            "tr",
-            "uk",
-            "fi",
-            "fr",
-            "hi",
-            "hr",
-            "cs",
-            "sv",
-            "ja"
+            "ar",  // Arabic
+            "bn",  // Bengali
+            "bg",  // Bulgarian
+            "ca",  // Catalan
+            "cs",  // Czech
+            "da",  // Danish
+            "de",  // German
+            "el",  // Greek
+            "en",  // English
+            "es",  // Spanish
+            "fi",  // Finnish
+            "fr",  // French
+            "he",  // Hebrew
+            "hi",  // Hindi
+            "hr",  // Croatian
+            "hu",  // Hungarian
+            "id",  // Indonesian
+            "it",  // Italian
+            "ja",  // Japanese
+            "jv",  // Javanese (необходимо проверить поддержку)
+            "ko",  // Korean
+            "mr",  // Marathi
+            "ms",  // Malay
+            "nl",  // Dutch
+            "no",  // Norwegian
+            "pa",  // Punjabi
+            "pl",  // Polish
+            "pt",  // Portuguese
+            "ro",  // Romanian
+            "ru",  // Russian
+            "si",  // Sinhala
+            "sk",  // Slovak
+            "sr",  // Serbian
+            "sv",  // Swedish
+            "ta",  // Tamil
+            "te",  // Telugu
+            "th",  // Thai
+            "tr",  // Turkish
+            "uk",  // Ukrainian
+            "ur",  // Urdu
+            "vi",  // Vietnamese
+            "zh-rCN",  // Simplified Chinese
+            "zh-rTW",  // Traditional Chinese (если требуется)
+            "zu"   // Zulu
         )
+
     }
 
     buildTypes {

@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">နောက်ဆုံးအပ်ဒိတ်</string>
+    <string name="set_location">တည်နေရာသတ်မှတ်ပါ။</string>
+    <string name="or">သို့မဟုတ်</string>
+    <string name="search_location">တည်နေရာကို ရှာဖွေပါ။</string>
+    <string name="use_my_geo_data">ကျွန်ုပ်၏ ပထဝီဝင်ဒေတာကို အသုံးပြုပါ။</string>
+    <string name="search_location_hint">ဥပမာ- လန်ဒန်</string>
+    <string name="system">စနစ်</string>
+</resources>

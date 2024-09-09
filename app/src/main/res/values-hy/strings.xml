@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">վերջին թարմացում</string>
+    <string name="set_location">Սահմանել տեղադրությունը</string>
+    <string name="or">կամ</string>
+    <string name="search_location">Որոնել տեղ</string>
+    <string name="use_my_geo_data">Օգտագործեք իմ աշխարհագրական տվյալները</string>
+    <string name="search_location_hint">օրինակ՝ Լոնդոն</string>
+    <string name="system">Համակարգ</string>
+</resources>

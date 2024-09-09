@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">viimeinen päivitys</string>
+    <string name="set_location">Aseta sijainti</string>
+    <string name="or">tai</string>
+    <string name="search_location">Hae sijaintia</string>
+    <string name="use_my_geo_data">Käytä maantieteellisiä tietojani</string>
+    <string name="search_location_hint">esimerkki: Lontoo</string>
+    <string name="system">Järjestelmä</string>
+</resources>

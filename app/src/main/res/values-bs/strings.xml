@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">posljednje ažuriranje</string>
+    <string name="set_location">Postavite lokaciju</string>
+    <string name="or">ili</string>
+    <string name="search_location">Traži lokaciju</string>
+    <string name="use_my_geo_data">Koristi moje geo podatke</string>
+    <string name="search_location_hint">primjer: London</string>
+    <string name="system">Sistem</string>
+</resources>

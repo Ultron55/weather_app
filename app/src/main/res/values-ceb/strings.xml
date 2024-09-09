@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">katapusan nga update</string>
+    <string name="set_location">Ibutang ang lokasyon</string>
+    <string name="or">o</string>
+    <string name="search_location">Pangitaa ang lokasyon</string>
+    <string name="use_my_geo_data">Gamita akong geo data</string>
+    <string name="search_location_hint">pananglitan: London</string>
+    <string name="system">Sistema</string>
+</resources>

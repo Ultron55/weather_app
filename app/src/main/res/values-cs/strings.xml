@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">poslední aktualizace</string>
+    <string name="set_location">Nastavit umístění</string>
+    <string name="or">nebo</string>
+    <string name="search_location">Vyhledat místo</string>
+    <string name="use_my_geo_data">Použít moje geografická data</string>
+    <string name="search_location_hint">příklad: Londýn</string>
+    <string name="system">Systém</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">마지막 업데이트</string>
+    <string name="set_location">위치 설정</string>
+    <string name="or">또는</string>
+    <string name="search_location">위치 검색</string>
+    <string name="use_my_geo_data">내 지오 데이터 사용</string>
+    <string name="search_location_hint">예: 런던</string>
+    <string name="system">시스템</string>
+</resources>

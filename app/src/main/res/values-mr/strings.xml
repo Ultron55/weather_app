@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">अंतिम अपडेट</string>
+    <string name="set_location">स्थान सेट करा</string>
+    <string name="or">किंवा</string>
+    <string name="search_location">स्थान शोधा</string>
+    <string name="use_my_geo_data">माझा भौगोलिक डेटा वापरा</string>
+    <string name="search_location_hint">उदाहरण: लंडन</string>
+    <string name="system">सिस्टम</string>
+</resources>

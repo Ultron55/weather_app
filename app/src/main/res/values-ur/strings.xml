@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">آخری اپ ڈیٹ</string>
+    <string name="set_location">مقام سیٹ کریں</string>
+    <string name="or">یا</string>
+    <string name = "search_location"> مقام تلاش کریں</string>
+    <string name="use_my_geo_data">میرا جیو ڈیٹا استعمال کریں</string>
+    <string name="search_location_hint">مثال: لندن</string>
+    <string name="system">سسٹم</string>
+</resources>

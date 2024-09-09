@@ -1,0 +1,9 @@
+<resources>
+    <string name="last_update">l\'ultima aghjurnazione</string>
+    <string name="set_location">Pone u locu</string>
+    <string name="or">o</string>
+    <string name="search_location">Search location</string>
+    <string name="use_my_geo_data">Use my geo data</string>
+    <string name="search_location_hint">example: London</string>
+    <string name="system">System</string>
+</resources>
