@@ -2,9 +2,11 @@ package example.weather.app.ui.weather.current
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.children
 import androidx.core.view.get
@@ -24,6 +26,7 @@ import example.weather.app.utils.languages
 import example.weather.app.utils.preferences.PrefManager
 import java.util.Locale
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CurrentWeatherFragment : Fragment() {
@@ -105,6 +108,18 @@ class CurrentWeatherFragment : Fragment() {
                 .fitCenter()
                 .placeholder(R.drawable.weather_loader)
                 .into(binding.weatherIconImv)
+            Glide
+                .with(requireContext())
+                .load(R.drawable.wind)
+                .into(binding.windImv)
+            val typedValue = TypedValue()
+            val theme = requireContext().theme
+            theme.resolveAttribute(
+                com.google.android.material.R.attr.colorAccent, typedValue, true)
+            @ColorInt val color = typedValue.data
+            binding.windImv.setColorFilter(color)
+            binding.windImv.rotation = it.windDegree.toFloat()
+            binding.windTv.text = getString(R.string.wind_value, it.windKph)
         }
     }
 }

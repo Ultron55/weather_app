@@ -6,6 +6,8 @@
     <string name="or">or</string>
     <string name="search_location">Search location</string>
     <string name="use_my_geo_data">Use my geo data</string>
+    <string name="wind" translatable="false">Wind: </string>
+    <string name="wind_value" translatable="false">%.1f Km/h</string>
     <string name="search_location_hint">example: London</string>
     <string name="system">System</string>
 </resources>
