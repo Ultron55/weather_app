@@ -57,9 +57,9 @@ class MainViewModel @Inject constructor(
         val geocoder = Geocoder(context)
         viewModelScope.launch {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                geocoder.getFromLocationName(name, 20) { addresses.value = it }
+                geocoder.getFromLocationName(name, 20) { addresses.postValue(it) }
             else
-                geocoder.getFromLocationName(name, 20)?.let { addresses.value = it }
+                geocoder.getFromLocationName(name, 20)?.let { addresses.postValue(it) }
         }
     }
 
@@ -69,11 +69,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                 geocoder.getFromLocationName(name, 20) {
-                    locationAddress.value = it.firstOrNull()
+                    locationAddress.postValue(it.firstOrNull())
                 }
             else
                 geocoder.getFromLocationName(name, 20)?.let {
-                    locationAddress.value = it.firstOrNull()
+                    locationAddress.postValue(it.firstOrNull())
                 }
         }
     }
