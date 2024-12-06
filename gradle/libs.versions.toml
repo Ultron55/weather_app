@@ -1,20 +1,23 @@
 [versions]
-agp = "8.5.2"
+activityCompose = "1.9.3"
+agp = "8.7.3"
 androidGifDrawable = "1.2.29"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.23"
 hilt = "2.48.1"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 appcompat = "1.7.0"
-kotlinStdlib = "2.0.0"
+kotlinStdlib = "2.0.20"
 kotlinxCoroutinesCore = "1.8.1"
 libraryVersion = "4.0.0"
-lifecycleCompiler = "2.8.4"
+lifecycleCompiler = "2.8.7"
 lifecycleExtensions = "2.2.0"
+lifecycleRuntimeCompose = "2.8.7"
 material = "1.12.0"
-activity = "1.9.1"
-constraintlayout = "2.1.4"
-navigationRuntimeKtx = "2.7.7"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
+material3 = "1.3.1"
+navigationRuntimeKtx = "2.8.4"
 okhttp = "4.12.0"
 glide = "4.16.0"
 preferenceKtx = "1.2.1"
@@ -22,20 +25,26 @@ recyclerview = "1.3.2"
 recyclerviewSelection = "1.1.0"
 retrofit = "2.11.0"
 playServicesLocation = "21.3.0"
+compose = "1.7.5"
 
 [libraries]
 android-gif-drawable = { module = "pl.droidsonroids.gif:android-gif-drawable", version.ref = "androidGifDrawable" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-compiler", version.ref = "lifecycleCompiler" }
 androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleCompiler" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleCompiler" }
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
 androidx-recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerviewSelection" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 chucker-library = { module = "com.github.chuckerteam.chucker:library", version.ref = "libraryVersion" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinStdlib" }
@@ -63,4 +72,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

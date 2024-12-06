@@ -7,9 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.children
-import androidx.core.view.get
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,6 +41,7 @@ import example.weather.app.R
 import example.weather.app.databinding.FragmentCurrentWeatherBinding
 import example.weather.app.ui.main.MainActivity
 import example.weather.app.ui.main.MainViewModel
+import example.weather.app.ui.theme.WeatherAppTheme
 import example.weather.app.utils.getFullLocationNameFormat
 import example.weather.app.utils.getLocation
 import example.weather.app.utils.languages
@@ -45,43 +67,83 @@ class CurrentWeatherFragment : Fragment() {
         _binding = FragmentCurrentWeatherBinding.inflate(
             layoutInflater, container, false
         )
+        binding.languageCov.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                LanguageView()
+            }
+        }
         return binding.root
     }
+
+    @Composable
+    fun LanguageView() {
+        WeatherAppTheme {
+            var isMenuExpanded by remember { mutableStateOf(false) }
+            Surface {
+                Box {
+                    Row (modifier = Modifier.clickable { isMenuExpanded = true }) {
+                        var lang = prefManager.savedLanguageCode
+                        if (lang == "")
+                            lang = (requireActivity().application as App).systemLanguageCode
+                        var textHeightDp by remember { mutableStateOf(0.dp) }
+                        val density = LocalDensity.current
+                        Text(
+                            text = lang,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            onTextLayout = { textLayoutResult ->
+                                textHeightDp = with(density) { textLayoutResult.size.height.toDp() }
+                            }
+                        )
+                        Image(
+                            painter = painterResource(id = android.R.drawable.ic_menu_more),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                            modifier = Modifier.size(textHeightDp)
+                        )
+                        DropdownMenu(
+                            expanded = isMenuExpanded,
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            onDismissRequest = { isMenuExpanded = false }
+                        ) {
+                            val app = LocalContext.current.applicationContext as App
+                            val systemLocale = Locale(app.systemLanguageCode)
+                            DropdownMenuItem(
+                                text = { Text(getString(R.string.system)) },
+                                onClick = {
+                                    isMenuExpanded = false
+                                    prefManager.savedLanguageCode = ""
+                                    (requireActivity().application as App).setLanguage()
+                                },
+                                enabled = lang.isNotEmpty() &&
+                                        (systemLocale.toLanguageTag() != lang)
+                            )
+                            languages.forEach { locale ->
+                                DropdownMenuItem(
+                                    text = { Text(locale.getDisplayName(locale)) },
+                                    onClick = {
+                                        isMenuExpanded = false
+                                        prefManager.savedLanguageCode = locale.toLanguageTag()
+                                        (requireActivity().application as App).setLanguage()
+                                    },
+                                    enabled = lang != locale.toLanguageTag()
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.locationTv.setOnClickListener {
             (activity as MainActivity).callSearchLocationDialog()
         }
-        var lang = prefManager.savedLanguageCode
-        if (lang == "") lang = (requireActivity().application as App).systemLanguageCode
-        binding.languageTv.text = lang
-        binding.languageLl.setOnClickListener { openLanguagesPopupMenu() }
         initObservers()
-    }
-
-    private fun openLanguagesPopupMenu() {
-        val popupMenu = PopupMenu(requireContext(), binding.languageLl)
-        popupMenu.menu.add(getString(R.string.system))
-        languages.forEach { locale -> popupMenu.menu.add(locale.getDisplayName(locale)) }
-        val currentLanguage = prefManager.savedLanguageCode
-        popupMenu
-            .menu[if (currentLanguage == "" ) 0 else languages.indexOf(Locale(currentLanguage)) + 1]
-            .isEnabled = false
-        popupMenu.show()
-        val app = requireActivity().application as App
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            val systemLocale = Locale(app.systemLanguageCode)
-            if (menuItem.title == systemLocale.getDisplayName(systemLocale) ||
-                popupMenu.menu.children.firstOrNull() == menuItem) {
-                prefManager.savedLanguageCode = ""
-            } else {
-                prefManager.savedLanguageCode =
-                    languages[popupMenu.menu.children.indexOf(menuItem) - 1].toLanguageTag()
-            }
-            app.setLanguage()
-            true
-        }
     }
 
     @SuppressLint("SetTextI18n")

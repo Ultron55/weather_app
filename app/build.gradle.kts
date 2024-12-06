@@ -1,20 +1,19 @@
-import java.util.Locale
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "example.weather.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "example.weather.app"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -79,18 +78,23 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     sourceSets {
         getByName("main").java.srcDirs("build/generated/source/navigation-args")
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.toString()
     }
 }
 
@@ -141,5 +145,12 @@ dependencies {
     implementation(libs.android.gif.drawable)
 
     implementation(libs.androidx.preference.ktx)
+
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+
 
 }
