@@ -3,6 +3,10 @@
     <style name="Base.Theme.WeatherApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/black_violet</item>
+        <item name="android:windowBackground">@color/black_violet</item>
+        <item name="android:statusBarColor">@color/black_violet</item>
+        <item name="colorPrimaryVariant">@color/dark_gray_violet</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
