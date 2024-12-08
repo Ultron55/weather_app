@@ -12,7 +12,15 @@ data class WeatherLocation(
     val name : String,
     val region : String,
     val country : String,
-)
+) {
+    companion object {
+        fun getTestData() = WeatherLocation(
+            name = "Mountain View",
+            region = "California",
+            country = "United States of America"
+        )
+    }
+}
 
 data class WeatherData(
     @SerializedName("last_updated_epoch") val lastUpdateEpoch : Long,
@@ -44,7 +52,26 @@ data class WeatherData(
     val uv : Float,
     @SerializedName("gust_mph") val gustMph : Float,
     @SerializedName("gust_kph") val gustKph : Float
-)
+) {
+    companion object {
+        fun getTestData() = WeatherData(lastUpdateEpoch=1733678100,
+            lastUpdatedDate="2024-12-08 09:15",
+            tempC=11.3f, tempF=52.3f,
+            isDay=1,
+            condition = Condition(
+                text="Дымка",
+                icon="",
+                code=1030
+            ),
+            windMph=2.2f, windKph=3.6f, windDegree=21, windDirection="NNE",
+            pressureMb=1022.0f, pressureIn=30.18f, precipitationMm=0.0f, precipitationIn=0.0f,
+            humidity=87, cloud=0, feelslikeC=11.7f, feelslikeF=53.0f,
+            windchillC=8.3f, windchillF=46.9f, heatindexC=8.6f, heatindexF=47.5f,
+            dewpointC=6.2f, dewpointF=43.1f, visKm=4.0f, visMiles=2.0f,
+            uv=0.4f, gustMph=4.2f, gustKph=6.8f
+        )
+    }
+}
 
 data class Condition(
     val text : String,

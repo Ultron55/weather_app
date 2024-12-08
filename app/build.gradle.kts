@@ -151,6 +151,11 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
+    implementation (libs.androidx.runtime)
+    implementation (libs.androidx.constraintlayout.compose)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 
 
 }

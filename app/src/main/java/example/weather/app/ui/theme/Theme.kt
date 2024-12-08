@@ -38,13 +38,15 @@ val LightColorPalette = lightColorScheme(
 )
 
 @Composable
-fun WeatherAppTheme(isDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun WeatherAppTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit) {
     val colors = if (isDarkTheme) DarkColorPalette else LightColorPalette
     MaterialTheme(
         colorScheme = colors,
         typography = Typography(
             displaySmall = TextStyle(fontWeight = FontWeight. W100, fontSize = 96.sp ),
-            labelLarge = TextStyle(fontWeight = FontWeight. W600, fontSize = 14.sp)
+            labelLarge = TextStyle(fontWeight = FontWeight. W600, fontSize = 16.sp)
         ),
         shapes = Shapes(),
         content = content,

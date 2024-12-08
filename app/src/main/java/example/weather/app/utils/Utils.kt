@@ -4,6 +4,9 @@ import android.content.Context
 import android.location.Address
 import android.os.Build
 import android.view.Window
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import example.weather.app.utils.preferences.PrefManager
 import java.util.Locale
 
@@ -23,6 +26,15 @@ fun getLocation(prefManager: PrefManager) =
         if (selectedLocation == "") prefManager.lastGPSLocation else selectedLocation
     }
 
+fun ImageLoader.Builder.create() : ImageLoader {
+    components {
+        add(
+            if (Build.VERSION.SDK_INT >= 28) ImageDecoderDecoder.Factory()
+            else GifDecoder.Factory()
+        )
+    }
+    return build()
+}
 
 val languages = listOf(
     Locale("en"),
