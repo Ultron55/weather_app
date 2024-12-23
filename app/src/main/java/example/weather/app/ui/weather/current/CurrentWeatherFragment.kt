@@ -12,7 +12,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,7 +22,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +43,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -124,8 +121,6 @@ class CurrentWeatherFragment : Fragment() {
     ) {
         WeatherAppTheme {
             Surface {
-                var isMenuExpanded by remember { mutableStateOf(false) }
-                val density = LocalDensity.current
                 ConstraintLayout(Modifier.fillMaxSize().padding(16.dp)) {
                     val (
                         languageMenu,
@@ -138,83 +133,19 @@ class CurrentWeatherFragment : Fragment() {
                     ) = createRefs()
 
                     // Language Menu
-                    Row(
-                        Modifier
-                            .constrainAs(languageMenu) {
-                                top.linkTo(parent.top)
-                                end.linkTo(parent.end)
-                            }
-                            .clickable { isMenuExpanded = true },
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        var textHeightDp by remember { mutableStateOf(0.dp) }
-                        Text(
-                            text = lang,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold,
-                            onTextLayout = { textLayoutResult ->
-                                textHeightDp = with(density) { textLayoutResult.size.height.toDp() }
-                            }
-                        )
-                        Image(
-                            painter = painterResource(android.R.drawable.ic_menu_more),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
-                            modifier = Modifier.size(textHeightDp)
-                        )
-                        DropdownMenu(
-                            expanded = isMenuExpanded,
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                            onDismissRequest = { isMenuExpanded = false }
-                        ) {
-                            val app = LocalContext.current.applicationContext as App
-                            val systemLanguageTag = Locale(app.systemLanguageCode).toLanguageTag()
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.system)) },
-                                onClick = {
-                                    isMenuExpanded = false
-                                    prefManager.savedLanguageCode = ""
-                                    (requireActivity().application as App).setLanguage()
-                                },
-                                enabled = lang.isNotEmpty() && systemLanguageTag != lang
-                            )
-                            languages.forEach { locale ->
-                                DropdownMenuItem(
-                                    text = { Text(locale.getDisplayName(locale)) },
-                                    onClick = {
-                                        isMenuExpanded = false
-                                        prefManager.savedLanguageCode = locale.toLanguageTag()
-                                        app.setLanguage()
-                                    },
-                                    enabled = lang != locale.toLanguageTag()
-                                )
-                            }
-                        }
-                    }
+                    LangMenu(lang, Modifier.constrainAs(languageMenu) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    })
 
                     // Weather Icon
-                    val iconData =
-                        if (currentWeatherData?.condition?.icon.isNullOrEmpty())
-                            R.drawable.weather_loader
-                        else "https:${currentWeatherData?.condition?.icon}"
-                    Image(
-                        rememberAsyncImagePainter(
-                            ImageRequest.Builder(LocalContext.current)
-                                .data(iconData)
-                                .placeholder(R.drawable.weather_loader)
-                                .crossfade(true)
-                                .build(),
-                            imageLoader = ImageLoader.Builder(LocalContext.current).create()
-                        ),
-                        "Weather Icon",
-                        Modifier
-                            .size(300.dp)
-                            .padding(8.dp)
-                            .constrainAs(weatherIcon) {
-                                top.linkTo(languageMenu.bottom)
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                            }
+                    WeatherIcon(
+                        currentWeatherData?.condition?.icon,
+                        Modifier.constrainAs(weatherIcon) {
+                            top.linkTo(languageMenu.bottom)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
                     )
 
                     // Condition Text
@@ -250,87 +181,174 @@ class CurrentWeatherFragment : Fragment() {
                     )
 
                     //Wind Info
-                    Row(
+                    WindInfo(
                         Modifier.constrainAs(windInfo) {
                             start.linkTo(parent.start)
                             bottom.linkTo(locationName.top, margin = 16.dp)
                         },
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(stringResource(R.string.wind))
-                        Spacer(Modifier.width(8.dp))
-                        val windValue =
-                            currentWeatherData?.windKph.let {
-                                if (it == null) "" else stringResource(R.string.wind_value, it) }
-                        Text(windValue)
-                        Spacer(Modifier.width(8.dp))
-                        Image(
-                            rememberAsyncImagePainter(
-                                ImageRequest.Builder(LocalContext.current)
-                                    .data(R.drawable.wind)
-                                    .crossfade(true)
-                                    .build(),
-                                imageLoader = ImageLoader.Builder(LocalContext.current).create()
-                            ),
-                            "wind_direction",
-                            Modifier.size(30.dp),
-                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
-                        )
-                    }
+                        currentWeatherData?.windKph
+                    )
 
                     // Location Section
-                    Column(
+                    LocationSection(
                         Modifier
                             .constrainAs(locationName) {
                                 bottom.linkTo(parent.bottom, margin = 32.dp)
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
-                            }
-                    ) {
-                        Text(
-                            locationText,
-                            Modifier
-                                .clickable { (activity as MainActivity).callSearchLocationDialog() }
-                        )
-                        Spacer(Modifier.height(16.dp))
-                        Row(horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text(stringResource(R.string.last_update))
-                            Text(
-                                currentWeatherData?.lastUpdatedDate ?: "",
-                                Modifier.padding(horizontal = 16.dp)
-                            )
-                        }
-                    }
+                            },
+                        locationText,
+                        currentWeatherData?.lastUpdatedDate
+                    )
 
                     // Loader
-                    if (isLoading) {
-                        val infiniteTransition = rememberInfiniteTransition(label = "")
-                        val rotationAngle by infiniteTransition.animateFloat(
-                            0f,
-                            360f,
-                            infiniteRepeatable(
-                                tween(durationMillis = 2000, easing = LinearEasing),
-                                 RepeatMode.Restart
-                            ),
-                            ""
-                        )
-                        Image(
-                            painterResource(R.drawable.loader),
-                            null,
-                            Modifier
-                                .fillMaxSize()
-                                .rotate(rotationAngle)
-                                .constrainAs(loader) {
-                                    top.linkTo(parent.top)
-                                    bottom.linkTo(parent.bottom)
-                                    start.linkTo(parent.start)
-                                    end.linkTo(parent.end)
-                                },
-                        )
-                    }
+                    Loader(
+                        Modifier.constrainAs(loader) {
+                            top.linkTo(parent.top)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end) },
+                        isLoading
+                    )
                 }
             }
         }
     }
 
+    @Composable
+    fun LangMenu(lang: String, modifier: Modifier) {
+        var isMenuExpanded by remember { mutableStateOf(false) }
+        val density = LocalDensity.current
+        Row(
+            modifier.clickable { isMenuExpanded = true },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            var textHeightDp by remember { mutableStateOf(0.dp) }
+            Text(
+                text = lang,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                onTextLayout = { textLayoutResult ->
+                    textHeightDp = with(density) { textLayoutResult.size.height.toDp() }
+                }
+            )
+            Image(
+                painter = painterResource(android.R.drawable.ic_menu_more),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                modifier = Modifier.size(textHeightDp)
+            )
+            DropdownMenu(
+                expanded = isMenuExpanded,
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                onDismissRequest = { isMenuExpanded = false }
+            ) {
+                val app = LocalContext.current.applicationContext as App
+                val systemLanguageTag = Locale(app.systemLanguageCode).toLanguageTag()
+                DropdownMenuItem(
+                    text = { Text(stringResource(R.string.system)) },
+                    onClick = {
+                        isMenuExpanded = false
+                        prefManager.savedLanguageCode = ""
+                        (requireActivity().application as App).setLanguage()
+                    },
+                    enabled = lang.isNotEmpty() && systemLanguageTag != lang
+                )
+                languages.forEach { locale ->
+                    DropdownMenuItem(
+                        text = { Text(locale.getDisplayName(locale)) },
+                        onClick = {
+                            isMenuExpanded = false
+                            prefManager.savedLanguageCode = locale.toLanguageTag()
+                            app.setLanguage()
+                        },
+                        enabled = lang != locale.toLanguageTag()
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun WeatherIcon(src: String?, modifier: Modifier) {
+        val iconData = if (src.isNullOrEmpty()) R.drawable.weather_loader else "https:${src}"
+        Image(
+            rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current)
+                    .data(iconData)
+                    .placeholder(R.drawable.weather_loader)
+                    .crossfade(true)
+                    .build(),
+                imageLoader = ImageLoader.Builder(LocalContext.current).create()
+            ),
+            "Weather Icon",
+            modifier.size(300.dp).padding(8.dp)
+        )
+    }
+
+    @Composable
+    fun WindInfo(modifier: Modifier, windKph : Float?) {
+        Row(modifier, verticalAlignment = Alignment.CenterVertically) {
+            Text(stringResource(R.string.wind))
+            Spacer(Modifier.width(8.dp))
+            val windValue =
+                windKph.let { if (it == null) "" else stringResource(R.string.wind_value, it) }
+            Text(windValue)
+            Spacer(Modifier.width(8.dp))
+            Image(
+                rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(R.drawable.wind)
+                        .crossfade(true)
+                        .build(),
+                    imageLoader = ImageLoader.Builder(LocalContext.current).create()
+                ),
+                "wind_direction",
+                Modifier.size(30.dp),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+            )
+        }
+    }
+
+    @Composable
+    fun LocationSection(modifier: Modifier, locationText: String, lastUpdatedDate : String?) {
+        Column(modifier) {
+            Text(
+                locationText,
+                Modifier
+                    .clickable { (activity as MainActivity).callSearchLocationDialog() }
+            )
+            Spacer(Modifier.height(16.dp))
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(stringResource(R.string.last_update))
+                Text(
+                    lastUpdatedDate ?: "",
+                    Modifier.padding(horizontal = 16.dp)
+                )
+            }
+        }
+    }
+
+    @Composable
+    fun Loader(modifier: Modifier, isLoading : Boolean) {
+        if (isLoading) {
+            val infiniteTransition = rememberInfiniteTransition(label = "")
+            val rotationAngle by infiniteTransition.animateFloat(
+                0f,
+                360f,
+                infiniteRepeatable(
+                    tween(durationMillis = 2000, easing = LinearEasing),
+                    RepeatMode.Restart
+                ),
+                ""
+            )
+            Image(
+                painterResource(R.drawable.loader),
+                null,
+                modifier
+                    .fillMaxSize()
+                    .rotate(rotationAngle)
+            )
+        }
+    }
 }
