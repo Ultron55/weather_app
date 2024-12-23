@@ -5,15 +5,12 @@ import android.location.Address
 import android.location.Geocoder
 import android.os.Build
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import example.weather.app.network.repositories.WeatherRepository
 import example.weather.app.network.responses.WeatherData
-import example.weather.app.network.responses.WeatherLocation
-import example.weather.app.utils.getLocation
 import example.weather.app.utils.preferences.PrefManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,10 +28,7 @@ class MainViewModel @Inject constructor(
     val isLoading = MutableStateFlow(false)
     private val _currentWeatherData = MutableStateFlow<WeatherData?>(null)
     val currentWeatherData: StateFlow<WeatherData?> = _currentWeatherData
-    private val _weatherLocationData =  MutableStateFlow<WeatherLocation?>(null)
-    val weatherLocationData: StateFlow<WeatherLocation?> = _weatherLocationData
     val addresses = MutableLiveData<List<Address>>()
-    val locationAddress = MutableLiveData<Address>()
     private val _locationText = MutableStateFlow("")
     val locationText: StateFlow<String> = _locationText
 
@@ -49,23 +43,11 @@ class MainViewModel @Inject constructor(
                 .collect {
                     Log.d("CurrentWeather", it.current.toString())
                     Log.d("CurrentWeather", it.toString())
-                    _currentWeatherData.value = it.current!!
-                    _weatherLocationData.value = it.location!!
-                    _locationText.value = "${it.location.name}, ${it.location.region}, ${it.location.country}"
+                    it.current?.let { data ->_currentWeatherData.value = data }
+                    it.location?.let { location -> _locationText.value = location.format() }
                 }
         }
     }
-
-//    fun updateLocation() {
-//        val location = getLocation(prefManager)
-//        if (location.isNotEmpty()) {
-//            val locationText = "${location.name}, $location.region, $location.country"
-//            _locationText.value = locationText
-//            searchLocationName(locationText, context)
-//        } else {
-//            _locationText.value = ""
-//        }
-//    }
 
     fun saveSelectedLocation(location : String) {
         prefManager.selectedLocation = location
@@ -80,21 +62,6 @@ class MainViewModel @Inject constructor(
                 geocoder.getFromLocationName(name, 20) { addresses.postValue(it) }
             else
                 geocoder.getFromLocationName(name, 20)?.let { addresses.postValue(it) }
-        }
-    }
-
-
-    fun searchLocationName(name : String, context: Context) {
-        val geocoder = Geocoder(context)
-        viewModelScope.launch {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                geocoder.getFromLocationName(name, 20) {
-                    locationAddress.postValue(it.firstOrNull())
-                }
-            else
-                geocoder.getFromLocationName(name, 20)?.let {
-                    locationAddress.postValue(it.firstOrNull())
-                }
         }
     }
 }

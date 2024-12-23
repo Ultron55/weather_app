@@ -20,6 +20,8 @@ data class WeatherLocation(
             country = "United States of America"
         )
     }
+
+    fun format() = "$name, $region, $country"
 }
 
 data class WeatherData(

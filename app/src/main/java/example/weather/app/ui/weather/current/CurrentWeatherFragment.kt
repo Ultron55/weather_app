@@ -63,6 +63,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import example.weather.app.App
 import example.weather.app.R
 import example.weather.app.network.responses.WeatherData
+import example.weather.app.network.responses.WeatherLocation
 import example.weather.app.ui.main.MainActivity
 import example.weather.app.ui.main.MainViewModel
 import example.weather.app.ui.theme.WeatherAppTheme
@@ -108,7 +109,7 @@ class CurrentWeatherFragment : Fragment() {
     fun WeatherScreenPreviewer() {
         WeatherScreenContent(
             WeatherData.getTestData(),
-            "Mountain View, California, United States of America",
+            WeatherLocation.getTestData().format(),
             "EN",
             false
         )
